@@ -1,54 +1,49 @@
 // Create a functional component that renders a form to upload a file
 
-import { useState } from "react";
 import "./FileUpload.css";
 import { useForm } from "react-hook-form";
-import { Button, TextField, MenuItem } from "@mui/material";
+import { Controller } from "react-hook-form";
+import { Button, TextField, MenuItem, Stack } from "@mui/material";
+import axios from "axios";
+
 function FileUpload() {
   //Write a function named handleFileUpload that receives the event object as a parameter and store that in state variable
-  const [filesList, setFilesList] = useState();
+
   const form = useForm();
-  const { register, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState, control } = form;
   const { errors } = formState;
-  const handleFileUpload = (event) => {
-    event.preventDefault();
-    setFilesList(event.target.files);
-  };
   const handleUploadClick = (data) => {
-    console.log("Final Data", { filesList, data });
-    if (!filesList) {
-      alert("Please select a file to upload");
-      return;
-    }
-    // const formData = new FormData();
-    // files.forEach((file, i) => {
-    //   formData.append(`file-${i}`, file, file.name);
-    // });
-
-    // for (let obj of formData) {
-    //   console.log(obj);
-    // }
-
-    // fetch("http://localhost:8080/upload", {
-    //   method: "POST",
-    //   body: formData,
-    // });
+    console.log("data", data);
+    const formData = new FormData();
+    formData.append("file", data.file[0]);
+    formData.append("applicationId", data.applicationId);
+    formData.append("kindOfFile", data.kindOfFile);
+    formData.append("statementDetails", data.statementDetails);
+    console.log(formData);
+    axios
+      .post("http://localhost:3000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log("res", res);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   };
 
-  const files = filesList ? [...filesList] : [];
-  return (
-    <div className="file-upload-container">
-      <form onSubmit={handleSubmit(handleUploadClick)}>
-        <Button
-          variant="contained"
-          component="label"
-          onChange={handleFileUpload}
-        >
-          Select File
-          <input type="file" hidden />
-        </Button>
+  const kindOfDocumentList = ["financial", "medical", "property"];
+  const handleErrorUploadClick = (error) => {
+    console.count(error);
+  };
 
-        <ul>
+  return (
+    <Stack className="file-upload-container" spacing={3} direction="column">
+      <h1>Upload Document</h1>
+      <form onSubmit={handleSubmit(handleUploadClick, handleErrorUploadClick)}>
+        {/* <ul>
           {files.map((file) => {
             return (
               <li key={file.name}>
@@ -56,15 +51,36 @@ function FileUpload() {
               </li>
             );
           })}
-        </ul>
-        <ul>
+        </ul> */}
+        <Stack spacing={3} direction="column">
+          <Controller
+            name="file"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <div>
+                <input
+                  type="file"
+                  required={true}
+                  onChange={(e) => {
+                    field.onChange(e.target.files);
+                  }}
+                />
+              </div>
+            )}
+          />
           <div>
             <TextField
               id="outlined-basic"
               label="Application ID"
               type="number"
               variant="outlined"
-              {...register("applicationId")}
+              {...register("applicationId", {
+                required: "Please enter application id",
+                valueAsNumber: true,
+              })}
+              error={!!errors.applicationId}
+              helperText={errors.applicationId?.message}
             />
           </div>
           <div>
@@ -72,40 +88,42 @@ function FileUpload() {
               id="outlined-basic"
               label="Statement Details"
               variant="outlined"
-              {...register("statementDetails")}
+              {...register("statementDetails", {
+                required: "Please enter statement details",
+              })}
+              error={!!errors.statementDetails}
+              helperText={errors.statementDetails?.message}
             />
           </div>
           <div>
             <TextField
               select
               fullWidth
-              label="Select"
+              label="Select the Kind Of File"
               defaultValue=""
               inputProps={register("kindOfFile", {
-                required: "Please enter currency",
+                required: "Please Choose kind of file",
               })}
-              error={errors.currency}
-              helperText={errors.currency?.message}
+              error={!!errors.kindOfFile}
+              helperText={errors.kindOfFile?.message}
             >
-              <MenuItem key="financial" value="financial">
-                Financial
-              </MenuItem>
-              <MenuItem key="medical" value="financial">
-                Medical
-              </MenuItem>
-              <MenuItem key="property" value="financial">
-                Property
-              </MenuItem>
+              {kindOfDocumentList.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
             </TextField>
           </div>
-        </ul>
-        <Button onClick={handleUploadClick} variant="contained" type="submit">
-          Upload File
-        </Button>
+          <div>
+            <Button variant="contained" type="submit">
+              Upload File
+            </Button>
+          </div>
+        </Stack>
       </form>
-    </div>
+    </Stack>
   );
 }
 export default FileUpload;
 
-//create the above form using material UI library
+//create a file input component using material ui and react hook form
