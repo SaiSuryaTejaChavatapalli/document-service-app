@@ -3,7 +3,7 @@
 import "./FileUpload.css";
 import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import { Button, TextField, MenuItem, Stack } from "@mui/material";
+import { Button, TextField, MenuItem, Stack, Input } from "@mui/material";
 import axios from "axios";
 
 function FileUpload() {
@@ -59,7 +59,8 @@ function FileUpload() {
             defaultValue=""
             render={({ field }) => (
               <div>
-                <input
+                <Input
+                  color="primary"
                   type="file"
                   required={true}
                   onChange={(e) => {
