@@ -1,3 +1,5 @@
+import Dummy from "./dummy";
+
 const FileView = () => {
   return <div>FileView</div>;
 };

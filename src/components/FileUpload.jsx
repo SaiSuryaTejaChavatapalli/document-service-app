@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { Button, TextField, MenuItem, Stack, Input } from "@mui/material";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function FileUpload() {
   //Write a function named handleFileUpload that receives the event object as a parameter and store that in state variable
-
+  const [fileUploadStatus, setFileUploadStatus] = useState("");
   const form = useForm();
   const { register, handleSubmit, formState, control } = form;
   const { errors } = formState;
@@ -28,13 +30,21 @@ function FileUpload() {
       })
       .then((res) => {
         console.log("res", res);
+        setFileUploadStatus("File Uploaded Successfully");
       })
       .catch((err) => {
         console.log("err", err);
+        setFileUploadStatus("File Upload Failed");
       });
   };
 
-  const kindOfDocumentList = ["financial", "medical", "property"];
+  const kindOfDocumentList = [
+    "financial",
+    "medical",
+    "property",
+    "educational",
+    "miscellaneous",
+  ];
   const handleErrorUploadClick = (error) => {
     console.count(error);
   };
@@ -119,8 +129,12 @@ function FileUpload() {
             <Button variant="contained" type="submit">
               Upload File
             </Button>
+            <Link to="/" className="section-link">
+              <Button variant="contained">Go to Home</Button>
+            </Link>
           </div>
         </Stack>
+        <div>{fileUploadStatus}</div>
       </form>
     </Stack>
   );

@@ -34,4 +34,5 @@
 .section-link {
   text-decoration: none;
   color: gray;
+  margin: 10px;
 }
