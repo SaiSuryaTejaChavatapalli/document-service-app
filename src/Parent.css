@@ -1,0 +1,20 @@
+input {
+  width: 50%;
+  height: 2rem;
+  border: none;
+  outline: none;
+}
+#searchBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}

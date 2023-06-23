@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./App.css";
 import UploadImg from "./assets/upload-your-files.png";
 import SearchImg from "./assets/search-your-files.png";
+
 //Create routings for upload document page and view document page
 
 function App() {

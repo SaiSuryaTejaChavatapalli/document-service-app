@@ -1,7 +1,10 @@
-import Dummy from "./dummy";
-
+import Parent from "../Parent";
 const FileView = () => {
-  return <div>FileView</div>;
+  return (
+    <div>
+      <Parent />
+    </div>
+  );
 };
 
 export default FileView;
