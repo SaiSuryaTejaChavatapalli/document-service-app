@@ -1,8 +1,12 @@
-input {
+.input {
   width: 50%;
   height: 2rem;
   border: none;
   outline: none;
+}
+input {
+  height: 2rem;
+  margin-right: 0.5rem;
 }
 #searchBar {
   display: flex;
