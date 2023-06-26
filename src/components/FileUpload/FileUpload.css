@@ -7,6 +7,10 @@
   height: 100vh;
   color: rgb(13, 102, 185);
 }
-.error-msg {
+
+.file-upload-success-status {
+  color: green;
+}
+.file-upload-failed-status {
   color: red;
 }
