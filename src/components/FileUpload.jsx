@@ -7,17 +7,23 @@ import { Button, TextField, MenuItem, Stack, Input } from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import { Loader } from "rsuite";
+import "react-toastify/dist/ReactToastify.css";
+import "rsuite/dist/rsuite-no-reset.min.css";
 function FileUpload() {
   //Write a function named handleFileUpload that receives the event object as a parameter and store that in state variable
-  const [fileUploadStatus, setFileUploadStatus] = useState("");
+  const [isLoaderVisible, setIsLoaderVisible] = useState(false);
   const form = useForm();
-  const { register, handleSubmit, formState, control } = form;
+  const { register, handleSubmit, formState, control, reset: resetForm } = form;
   const { errors } = formState;
+
   const handleUploadClick = (data) => {
     console.log("data", data);
+    setIsLoaderVisible(true);
     const formData = new FormData();
     formData.append("file", data.file[0]);
+    formData.append("date", data.file[0].lastModifiedDate);
     formData.append("applicationId", data.applicationId);
     formData.append("kindOfFile", data.kindOfFile);
     formData.append("statementDetails", data.statementDetails);
@@ -30,11 +36,32 @@ function FileUpload() {
       })
       .then((res) => {
         console.log("res", res);
-        setFileUploadStatus("File Uploaded Successfully");
+        setIsLoaderVisible(false);
+        toast.success("Document Uploaded Successfully!", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        resetForm();
       })
       .catch((err) => {
         console.log("err", err);
-        setFileUploadStatus("File Upload Failed");
+        setIsLoaderVisible(false);
+        toast.error("Document Upload Failed!", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
 
@@ -50,18 +77,9 @@ function FileUpload() {
   };
 
   return (
-    <Stack className="file-upload-container" spacing={3} direction="column">
+    <Stack spacing={3} direction="column" className="file-upload-container">
       <h1>Upload Document</h1>
       <form onSubmit={handleSubmit(handleUploadClick, handleErrorUploadClick)}>
-        {/* <ul>
-          {files.map((file) => {
-            return (
-              <li key={file.name}>
-                {file.name} -{file.type}
-              </li>
-            );
-          })}
-        </ul> */}
         <Stack spacing={3} direction="column">
           <Controller
             name="file"
@@ -88,7 +106,15 @@ function FileUpload() {
               variant="outlined"
               {...register("applicationId", {
                 required: "Please enter application id",
-                valueAsNumber: true,
+                //custom valiate to accept only 5 digit applicationId
+                validate: {
+                  isValidApplicationId: (value) => {
+                    if (value.toString().length !== 5) {
+                      console.log(value);
+                      return "Please enter 5 digit application id";
+                    }
+                  },
+                },
               })}
               error={!!errors.applicationId}
               helperText={errors.applicationId?.message}
@@ -134,8 +160,23 @@ function FileUpload() {
             </Link>
           </div>
         </Stack>
-        <div>{fileUploadStatus}</div>
       </form>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
+      <div>
+        {isLoaderVisible && <Loader size="lg" content="Loading" vertical />}
+      </div>
     </Stack>
   );
 }
