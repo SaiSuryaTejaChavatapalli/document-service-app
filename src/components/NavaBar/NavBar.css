@@ -1,0 +1,22 @@
+.nav-bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: ghostwhite;
+  padding-right: 20px;
+}
+.nav-bar-links {
+  display: flex;
+  color: rgb(13, 102, 185);
+  gap: 10px;
+  font-weight: 700;
+}
+.logo {
+  color: rgb(13, 102, 185);
+  font-weight: 700;
+}
+.nav-bar-link {
+  color: rgb(13, 102, 185);
+  text-decoration: none;
+}

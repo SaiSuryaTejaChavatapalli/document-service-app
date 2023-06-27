@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { Button, TextField, MenuItem, Stack, Input } from "@mui/material";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Loader } from "rsuite";
@@ -155,9 +154,6 @@ function FileUpload() {
             <Button variant="contained" type="submit">
               Upload File
             </Button>
-            <Link to="/" className="section-link">
-              <Button variant="contained">Go to Home</Button>
-            </Link>
           </div>
         </Stack>
       </form>

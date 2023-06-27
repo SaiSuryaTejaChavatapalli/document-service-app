@@ -4,18 +4,22 @@ import App from "./App.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import FileView from "./components/FileView/FileView";
 import FileUpload from "./components/FileUpload/FileUpload";
+import DocumentServiceMain from "./components/DocumentServiceMain.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-  },
-  {
-    path: "/file-upload",
-    element: <FileUpload />,
-  },
-  {
-    path: "/file-view",
-    element: <FileView />,
+    element: <DocumentServiceMain />,
+    children: [
+      { path: "/", element: <App /> },
+      {
+        path: "file-upload",
+        element: <FileUpload />,
+      },
+      {
+        path: "file-view",
+        element: <FileView />,
+      },
+    ],
   },
 ]);
 

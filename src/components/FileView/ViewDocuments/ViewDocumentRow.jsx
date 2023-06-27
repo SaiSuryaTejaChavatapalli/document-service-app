@@ -23,6 +23,7 @@ const handleDelete = (key) => {
       console.log(err);
     });
 };
+
 let ViewDocumentRow = ({ data }) => {
   return (
     <TableRow>
@@ -38,7 +39,7 @@ let ViewDocumentRow = ({ data }) => {
           <CloudDownloadOutlinedIcon color="primary" />
         </a>
       </TableCell>
-      <TableCell align="center">
+      <TableCell align="center" sx={{ cursor: "pointer" }}>
         <DeleteOutlineIcon
           color="error"
           onClick={() => handleDelete(data.key)}
