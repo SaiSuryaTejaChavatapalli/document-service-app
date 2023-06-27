@@ -63,7 +63,7 @@ function ViewDocumentsContainer() {
   // }, [end]);
 
   return (
-    <div className="App">
+    <div className="App" style={{ marginTop: "4.5rem" }}>
       <header className="App-header">
         <div id="searchBar" width="100%">
           <Stack
@@ -71,6 +71,13 @@ function ViewDocumentsContainer() {
             justifyContent={"space-between"}
             alignItems={"center"}
             width="100%"
+            sx={{
+              position: "fixed",
+              top: "4rem",
+              padding: "0px 1rem",
+              zIndex: 1,
+              backgroundColor: "ghostWhite",
+            }}
           >
             <Stack
               direction="row"
@@ -80,6 +87,7 @@ function ViewDocumentsContainer() {
                 border: "1px solid grey",
                 width: "50%",
                 padding: "0rem 1rem",
+                backgroundColor: "#ffffff",
               }}
             >
               <input
@@ -108,6 +116,7 @@ function ViewDocumentsContainer() {
                 variant="contained"
                 color="primary"
                 onClick={() => setFilterData(dateFilter(data, start, end))}
+                style={{ marginLeft: ".5rem" }}
               >
                 OK
               </Button>
