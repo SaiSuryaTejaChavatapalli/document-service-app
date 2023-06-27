@@ -13,18 +13,7 @@ import { styled } from "@mui/system";
 //   backgroundColor: red,
 // });
 
-const handleDelete = (key) => {
-  axios
-    .get(`http://localhost:3000/delete/${key}`)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-let ViewDocumentRow = ({ data }) => {
+let ViewDocumentRow = ({ data, handleDelete }) => {
   return (
     <TableRow>
       <TableCell align="center">{data.applicationId}</TableCell>

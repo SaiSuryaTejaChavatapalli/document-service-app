@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./App.css";
-import UploadImg from "./assets/upload-your-files.png";//importing images
+import UploadImg from "./assets/upload-your-files.png"; //importing images
 import SearchImg from "./assets/search-your-files.png";
 
 //Create routings for upload document page and view document page
@@ -16,8 +16,9 @@ function App() {
               <h3>Upload File</h3>
               <img
                 src={UploadImg}
-                alt="upload-files"
+                alt="upload-files-img"
                 className="section-item-img"
+                data-testid="upload-files-img"
               />
             </div>
           </Link>
@@ -26,8 +27,9 @@ function App() {
             <div className="section-item">
               <h3>View Files</h3>
               <img
+                data-testid="view-files-img"
                 src={SearchImg}
-                alt="view--files-img"
+                alt="view-files-img"
                 className="section-item-img"
               />
             </div>

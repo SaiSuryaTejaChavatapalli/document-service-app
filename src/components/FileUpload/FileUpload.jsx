@@ -13,14 +13,15 @@ import "rsuite/dist/rsuite-no-reset.min.css";
 function FileUpload() {
   //Write a function named handleFileUpload that receives the event object as a parameter and store that in state variable
   const [isLoaderVisible, setIsLoaderVisible] = useState(false);
-  const form = useForm();//useForm is a custom hook for managing forms with ease.
+  const form = useForm(); //useForm is a custom hook for managing forms with ease.
   const { register, handleSubmit, formState, control, reset: resetForm } = form;
   const { errors } = formState; //errors is an object that contains all the errors that are present in the form.
 
-  const handleUploadClick = (data) => { //sends file to server on clicking Upload button.
+  const handleUploadClick = (data) => {
+    //sends file to server on clicking Upload button.
     console.log("data", data);
     setIsLoaderVisible(true); //loader is visible while uploading file.
-    const formData = new FormData(); 
+    const formData = new FormData();
     formData.append("file", data.file[0]); //
     formData.append("date", data.file[0].lastModifiedDate);
     formData.append("applicationId", data.applicationId);
@@ -28,7 +29,7 @@ function FileUpload() {
     formData.append("statementDetails", data.statementDetails);
     console.log(formData);
     axios //axios is used to make http requests.
-      
+
       .post("http://localhost:3000/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -37,7 +38,8 @@ function FileUpload() {
       .then((res) => {
         console.log("res", res);
         setIsLoaderVisible(false); //loader is invisible after file upload.
-        toast.success("Document Uploaded Successfully!", { //toast is used to display success message.
+        toast.success("Document Uploaded Successfully!", {
+          //toast is used to display success message.
           position: "bottom-center",
           autoClose: 5000, //autoClose is used to close the toast after 5 seconds.
           hideProgressBar: true, //hideProgressBar is used to hide the progress bar.
@@ -49,10 +51,11 @@ function FileUpload() {
         });
         resetForm(); //resets the form after file upload.
       })
-      .catch((err) => { 
+      .catch((err) => {
         console.log("err", err);
         setIsLoaderVisible(false); //loader is invisible after file upload.
-        toast.error("Document Upload Failed!", {//toast is used to display error message.
+        toast.error("Document Upload Failed!", {
+          //toast is used to display error message.
           position: "bottom-center",
           autoClose: 5000,
           hideProgressBar: true,
@@ -65,14 +68,15 @@ function FileUpload() {
       });
   };
 
-  const kindOfDocumentList = [ //kindOfDocumentList is an array that contains all the kind of documents that can be uploaded.
+  const kindOfDocumentList = [
+    //kindOfDocumentList is an array that contains all the kind of documents that can be uploaded.
     "financial",
     "medical",
     "property",
     "educational",
     "miscellaneous",
   ];
-  const handleErrorUploadClick = (error) => { 
+  const handleErrorUploadClick = (error) => {
     console.count(error);
   };
 
@@ -91,7 +95,7 @@ function FileUpload() {
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <div>
+              <div data-testid="file-upload-input">
                 <Input
                   color="primary"
                   type="file"
@@ -103,7 +107,7 @@ function FileUpload() {
               </div>
             )}
           />
-          <div>
+          <div data-testid="applicationId">
             <TextField
               id="outlined-basic"
               label="Application ID"
@@ -122,10 +126,10 @@ function FileUpload() {
                 },
               })}
               error={!!errors.applicationId} //error is true if applicationId is not valid.
-              helperText={errors.applicationId?.message}//helperText is the message that is displayed if applicationId is not valid.
+              helperText={errors.applicationId?.message} //helperText is the message that is displayed if applicationId is not valid.
             />
           </div>
-          <div>
+          <div data-testid="statementDetails">
             <TextField
               id="outlined-basic"
               label="Statement Details"
@@ -137,7 +141,7 @@ function FileUpload() {
               helperText={errors.statementDetails?.message}
             />
           </div>
-          <div>
+          <div data-testid="kindOfFile">
             <TextField
               select
               fullWidth
@@ -163,20 +167,23 @@ function FileUpload() {
           </div>
         </Stack>
       </form>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-      <ToastContainer />
-      <div>
+      <div data-testid="toast">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <ToastContainer />
+      </div>
+
+      <div data-testid="loader">
         {isLoaderVisible && (
           <Loader size="lg" content="Uploading document..." vertical />
         )}

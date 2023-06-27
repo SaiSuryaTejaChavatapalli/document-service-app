@@ -1,6 +1,7 @@
-import { Outlet } from "react-router-dom";//importing outlet
-import NavBar from "./NavaBar/NavBar"; //importing navbar
-const DocumentServiceMain = () => {//main component
+import { Outlet } from "react-router-dom"; //importing outlet
+import NavBar from "./NavBar/NavBar"; //importing navbar
+const DocumentServiceMain = () => {
+  //main component
   return (
     <div>
       <NavBar />
@@ -9,4 +10,4 @@ const DocumentServiceMain = () => {//main component
   );
 };
 
-export default DocumentServiceMain; 
+export default DocumentServiceMain;

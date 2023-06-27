@@ -5,6 +5,7 @@
   padding: 20px;
   background-color: ghostwhite;
   padding-right: 20px;
+  border-bottom: solid gray 1px;
 }
 .nav-bar-links {
   display: flex;

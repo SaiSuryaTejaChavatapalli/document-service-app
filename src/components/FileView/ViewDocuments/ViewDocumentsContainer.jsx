@@ -14,9 +14,10 @@ import {
 } from "@mui/material"; // npm install @mui/material
 
 import ViewDocumentRow from "./ViewDocumentRow"; // npm install @mui/material
-import { dateFilter } from "../../../utils/viewDocsUtils";// npm install @mui/material
+import { dateFilter } from "../../../utils/viewDocsUtils"; // npm install @mui/material
 
-function ViewDocumentsContainer() { //A container's view site object manages the display space for a particular view of a document
+function ViewDocumentsContainer() {
+  //A container's view site object manages the display space for a particular view of a document
   let [data, setData] = useState([]);
   let [searchTxt, setSearchTxt] = useState("");
   let [filterData, setFilterData] = useState([]);
@@ -26,8 +27,7 @@ function ViewDocumentsContainer() { //A container's view site object manages the
 
   let search = () => {
     if (searchTxt === "") {
-      setFilterData(data);//setFilterData(data);
-    
+      setFilterData(data); //setFilterData(data);
     } else {
       let newData = data.filter((item) => {
         for (let i of Object.values(item)) {
@@ -43,17 +43,30 @@ function ViewDocumentsContainer() { //A container's view site object manages the
     }
   };
 
+  const handleDelete = (key) => {
+    axios
+      .get(`http://localhost:3000/delete/${key}`)
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   let fetchData = async () => {
     try {
-      let data = await axios.get("http://localhost:3000/search");//fetch the data from the server
-      setData(data.data.files);//set the data to the state
-      setFilterData(data.data.files);////set the data to the state
-      console.log(data.data.files);////set the data to the state
+      let data = await axios.get("http://localhost:3000/search"); //fetch the data from the server
+      setData(data.data.files); //set the data to the state
+      setFilterData(data.data.files);
+      console.log(data.data.files);
     } catch (err) {
       console.log(err);
     }
   };
-  useEffect(() => {//whenever the component is mounted, the fetchData function is called
+  useEffect(() => {
+    //whenever the component is mounted, the fetchData function is called
     fetchData();
   }, []);
   useEffect(() => {
@@ -74,7 +87,7 @@ function ViewDocumentsContainer() { //A container's view site object manages the
             width="100%"
             sx={{
               position: "fixed",
-              top: "4rem",
+              top: "5rem",
               padding: "0px 1rem",
               zIndex: 1,
               backgroundColor: "ghostWhite",
@@ -93,21 +106,24 @@ function ViewDocumentsContainer() { //A container's view site object manages the
             >
               <input
                 type="text"
+                data-testid="search-input"
                 className="input"
                 placeholder="Search the Files"
                 value={searchTxt}
-                onChange={(e) => setSearchTxt(e.target.value)}//set the searchTxt to the state
+                onChange={(e) => setSearchTxt(e.target.value)} //set the searchTxt to the state
               />
               <SearchSharpIcon />
             </Stack>
             <div>
               <input
+                data-testid="start-date"
                 type="date"
                 width="25%"
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
               />
               <input
+                data-testid="end-date"
                 type="date"
                 width="25%"
                 value={end}
@@ -163,7 +179,11 @@ function ViewDocumentsContainer() { //A container's view site object manages the
             </TableHead>
             <TableBody>
               {filterData?.map((item, index) => (
-                <ViewDocumentRow key={item._id} data={item} />
+                <ViewDocumentRow
+                  key={item._id}
+                  data={item}
+                  handleDelete={handleDelete}
+                />
               ))}
             </TableBody>
           </Table>
