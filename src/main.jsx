@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import FileView from "./components/FileView/FileView";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";//react router dom v6
+import FileView from "./components/FileView/FileView";//react router dom v6
 import FileUpload from "./components/FileUpload/FileUpload";
-import DocumentServiceMain from "./components/DocumentServiceMain.jsx";
+import DocumentServiceMain from "./components/DocumentServiceMain.jsx";//react router dom v6
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")).render(//react router dom v6
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>

@@ -1,6 +1,6 @@
-import ViewDocumentsContainer from "./ViewDocuments/ViewDocumentsContainer";
+import ViewDocumentsContainer from "./ViewDocuments/ViewDocumentsContainer"; 
 import "./FileView.css";
-const FileView = () => {
+const FileView = () => {// eslint-disable-line
   return (
     <div className="file-view-container">
       <ViewDocumentsContainer />

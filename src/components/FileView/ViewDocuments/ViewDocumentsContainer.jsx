@@ -1,8 +1,8 @@
-import axios from "axios";
-import { Stack, Button } from "@mui/material";
-import SearchSharpIcon from "@mui/icons-material/SearchSharp";
-import { useEffect, useState } from "react";
-import "./ViewDocumentsContainer.css";
+import axios from "axios"; // npm install axios
+import { Stack, Button } from "@mui/material"; // npm install @mui/material
+import SearchSharpIcon from "@mui/icons-material/SearchSharp"; // npm install @mui/icons-material
+import { useEffect, useState } from "react"; // npm install react
+import "./ViewDocumentsContainer.css"; // npm install @mui/icons-material
 import {
   Table,
   TableContainer,
@@ -11,12 +11,12 @@ import {
   TableRow,
   TableHead,
   Paper,
-} from "@mui/material";
+} from "@mui/material"; // npm install @mui/material
 
-import ViewDocumentRow from "./ViewDocumentRow";
-import { dateFilter } from "../../../utils/viewDocsUtils";
+import ViewDocumentRow from "./ViewDocumentRow"; // npm install @mui/material
+import { dateFilter } from "../../../utils/viewDocsUtils";// npm install @mui/material
 
-function ViewDocumentsContainer() {
+function ViewDocumentsContainer() { //A container's view site object manages the display space for a particular view of a document
   let [data, setData] = useState([]);
   let [searchTxt, setSearchTxt] = useState("");
   let [filterData, setFilterData] = useState([]);
@@ -26,7 +26,8 @@ function ViewDocumentsContainer() {
 
   let search = () => {
     if (searchTxt === "") {
-      setFilterData(data);
+      setFilterData(data);//setFilterData(data);
+    
     } else {
       let newData = data.filter((item) => {
         for (let i of Object.values(item)) {
@@ -44,15 +45,15 @@ function ViewDocumentsContainer() {
 
   let fetchData = async () => {
     try {
-      let data = await axios.get("http://localhost:3000/search");
-      setData(data.data.files);
-      setFilterData(data.data.files);
-      console.log(data.data.files);
+      let data = await axios.get("http://localhost:3000/search");//fetch the data from the server
+      setData(data.data.files);//set the data to the state
+      setFilterData(data.data.files);////set the data to the state
+      console.log(data.data.files);////set the data to the state
     } catch (err) {
       console.log(err);
     }
   };
-  useEffect(() => {
+  useEffect(() => {//whenever the component is mounted, the fetchData function is called
     fetchData();
   }, []);
   useEffect(() => {
@@ -87,7 +88,7 @@ function ViewDocumentsContainer() {
                 className="input"
                 placeholder="Search the Files"
                 value={searchTxt}
-                onChange={(e) => setSearchTxt(e.target.value)}
+                onChange={(e) => setSearchTxt(e.target.value)}//set the searchTxt to the state
               />
               <SearchSharpIcon />
             </Stack>

@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from "axios"; //axios is used to make http requests
 
-export function formatSizeUnits(bytes) {
-  if (bytes >= 1073741824) {
-    bytes = (bytes / 1073741824).toFixed(2) + " GB";
+export function formatSizeUnits(bytes) { 
+  if (bytes >= 1073741824) { 
+    bytes = (bytes / 1073741824).toFixed(2) + " GB"; 
   } else if (bytes >= 1048576) {
     bytes = (bytes / 1048576).toFixed(2) + " MB";
   } else if (bytes >= 1024) {
@@ -16,10 +16,10 @@ export function formatSizeUnits(bytes) {
   }
   return bytes;
 }
-export let dateFn = (data) => {
+export let dateFn = (data) => { 
   let d = new Date(data.date);
   let month =
-    d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
+    d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1; 
   let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
   let date = `${day}-${month}-${d.getFullYear()}`;
   return date;
@@ -27,7 +27,7 @@ export let dateFn = (data) => {
 
 export const dateFilter = (data, start, end) => {
   console.log({ start, end, data });
-  const filteredData = data.filter((item) => {
+  const filteredData = data.filter((item) => { 
     const startDate = new Date(start);
 
     const endDate = new Date(end + " " + "11:59 pm");
