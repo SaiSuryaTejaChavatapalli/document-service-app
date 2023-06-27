@@ -41,7 +41,7 @@ export const dateFilter = (data, start, end) => {
 
 export let deleteFn = async (key) => {
   try {
-    let response = await axios.get(`https://localhost:3000/delete/${key}`);
+    const response = await axios.get(`https://localhost:3000/delete/${key}`);
     console.log({ response });
   } catch (error) {
     console.log(error);

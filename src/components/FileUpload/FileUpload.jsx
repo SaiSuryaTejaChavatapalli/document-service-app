@@ -77,7 +77,12 @@ function FileUpload() {
   };
 
   return (
-    <Stack spacing={3} direction="column" className="file-upload-container"> 
+    <Stack
+      spacing={3}
+      direction="column"
+      className="file-upload-container"
+      style={{ marginTop: "4.5rem" }}
+    >
       <h1>Upload Document</h1>
       <form onSubmit={handleSubmit(handleUploadClick, handleErrorUploadClick)}>
         <Stack spacing={3} direction="column">
