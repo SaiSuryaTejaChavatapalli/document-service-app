@@ -175,7 +175,9 @@ function FileUpload() {
       />
       <ToastContainer />
       <div>
-        {isLoaderVisible && <Loader size="lg" content="Loading" vertical />}
+        {isLoaderVisible && (
+          <Loader size="lg" content="Uploading document..." vertical />
+        )}
       </div>
     </Stack>
   );

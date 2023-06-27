@@ -1,6 +1,7 @@
 import { TableRow, TableCell } from "@mui/material";
 import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import axios from "axios";
 import {
   formatSizeUnits,
   dateFn,
@@ -12,6 +13,16 @@ import { styled } from "@mui/system";
 //   backgroundColor: red,
 // });
 
+const handleDelete = (key) => {
+  axios
+    .get(`http://localhost:3000/delete/${key}`)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 let ViewDocumentRow = ({ data }) => {
   return (
     <TableRow>
@@ -28,7 +39,10 @@ let ViewDocumentRow = ({ data }) => {
         </a>
       </TableCell>
       <TableCell align="center">
-        <DeleteOutlineIcon color="error" onClick={() => deleteFn(data.key)} />
+        <DeleteOutlineIcon
+          color="error"
+          onClick={() => handleDelete(data.key)}
+        />
       </TableCell>
     </TableRow>
   );

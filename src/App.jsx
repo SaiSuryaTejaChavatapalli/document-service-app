@@ -16,7 +16,7 @@ function App() {
               <h3>Upload File</h3>
               <img
                 src={UploadImg}
-                alt="upload-img"
+                alt="upload-files"
                 className="section-item-img"
               />
             </div>
@@ -27,7 +27,7 @@ function App() {
               <h3>View Files</h3>
               <img
                 src={SearchImg}
-                alt="upload-img"
+                alt="view--files-img"
                 className="section-item-img"
               />
             </div>

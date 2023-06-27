@@ -1,7 +1,8 @@
 import ViewDocumentsContainer from "./ViewDocuments/ViewDocumentsContainer";
+import "./FileView.css";
 const FileView = () => {
   return (
-    <div>
+    <div className="file-view-container">
       <ViewDocumentsContainer />
     </div>
   );
