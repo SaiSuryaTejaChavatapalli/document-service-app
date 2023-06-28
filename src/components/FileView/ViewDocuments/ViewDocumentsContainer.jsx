@@ -12,22 +12,23 @@ import {
   TableHead,
   Paper,
 } from "@mui/material"; // npm install @mui/material
-
 import ViewDocumentRow from "./ViewDocumentRow"; // npm install @mui/material
 import { dateFilter } from "../../../utils/viewDocsUtils"; // npm install @mui/material
+//------------------------------------------------------------------------------------------------
 
+//This ViewDocumentsContainer component is used to display the table with different documents list.
+//In this table ,User can download document and delete document and search document
+//User can filter the documents according to date
 function ViewDocumentsContainer() {
-  //A container's view site object manages the display space for a particular view of a document
-  let [data, setData] = useState([]);
-  let [searchTxt, setSearchTxt] = useState("");
-  let [filterData, setFilterData] = useState([]);
-  // let [date, setDate] = useState({ start: "", end: "" });
-  let [start, setStart] = useState("");
-  let [end, setEnd] = useState("");
+  const [data, setData] = useState([]);
+  const [searchTxt, setSearchTxt] = useState("");
+  const [filterData, setFilterData] = useState([]);
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
 
-  let search = () => {
+  const search = () => {
     if (searchTxt === "") {
-      setFilterData(data); //setFilterData(data);
+      setFilterData(data);
     } else {
       let newData = data.filter((item) => {
         for (let i of Object.values(item)) {
@@ -42,7 +43,7 @@ function ViewDocumentsContainer() {
       setFilterData(newData);
     }
   };
-
+  //Handle Delete function is used to delete a file form database
   const handleDelete = (key) => {
     axios
       .get(`http://localhost:3000/delete/${key}`)
@@ -54,8 +55,8 @@ function ViewDocumentsContainer() {
         console.log(err);
       });
   };
-
-  let fetchData = async () => {
+  //This Function is used to get data from database using axios
+  const fetchData = async () => {
     try {
       let data = await axios.get("http://localhost:3000/search"); //fetch the data from the server
       setData(data.data.files); //set the data to the state
@@ -66,7 +67,7 @@ function ViewDocumentsContainer() {
     }
   };
   useEffect(() => {
-    //whenever the component is mounted, the fetchData function is called
+    //whenever the search text changes this function will re-render
     fetchData();
   }, []);
   useEffect(() => {
@@ -196,3 +197,4 @@ function ViewDocumentsContainer() {
 }
 
 export default ViewDocumentsContainer;
+//Exporting ViewDocumentsContainer component

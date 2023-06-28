@@ -1,5 +1,4 @@
 // Create a functional component that renders a form to upload a file
-
 import "./FileUpload.css";
 import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
@@ -10,6 +9,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { Loader } from "rsuite";
 import "react-toastify/dist/ReactToastify.css";
 import "rsuite/dist/rsuite-no-reset.min.css";
+import { kindOfDocumentList } from "../../utils/fileUploadUtils";
+//--------------------------------------------------------------------------------------------------------------
+
+//This FileUpload Component is used to upload files through an UI and it stores that files on Database.
 function FileUpload() {
   //Write a function named handleFileUpload that receives the event object as a parameter and store that in state variable
   const [isLoaderVisible, setIsLoaderVisible] = useState(false);
@@ -67,16 +70,8 @@ function FileUpload() {
       });
   };
 
-  const kindOfDocumentList = [
-    //kindOfDocumentList is an array that contains all the kind of documents that can be uploaded.
-    "financial",
-    "medical",
-    "property",
-    "educational",
-    "miscellaneous",
-  ];
   const handleErrorUploadClick = (error) => {
-    console.count(error);
+    console.log(error);
   };
 
   return (
@@ -191,5 +186,3 @@ function FileUpload() {
   );
 }
 export default FileUpload; //export the FileUpload component.
-
-//create a file input component using material ui and react hook form

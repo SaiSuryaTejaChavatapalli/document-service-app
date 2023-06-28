@@ -1,5 +1,8 @@
 import "./NavBar.css";
 import { Link } from "react-router-dom"; //importing Link from react-router-dom
+//-------------------------------------------------------
+
+//This component is used for NavBar ,User can navigate to other pages by clicking links in this Navbar
 const NavBar = () => {
   return (
     <div

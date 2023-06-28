@@ -1,3 +1,5 @@
+//In this File We have all the utilities used for the viewDocs page
+
 export function formatSizeUnits(bytes) {
   if (bytes >= 1073741824) {
     bytes = (bytes / 1073741824).toFixed(2) + " GB";

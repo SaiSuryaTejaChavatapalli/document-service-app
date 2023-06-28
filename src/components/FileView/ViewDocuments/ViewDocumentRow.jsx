@@ -3,6 +3,7 @@ import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { formatSizeUnits, dateFn } from "../../../utils/viewDocsUtils";
 
+//This component is used for Individual Entry of the document we uploaded
 const ViewDocumentRow = ({ data, handleDelete }) => {
   return (
     <TableRow>

@@ -5,6 +5,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"; //react 
 import FileView from "./components/FileView/FileView"; //react router dom v6
 import FileUpload from "./components/FileUpload/FileUpload";
 import DocumentServiceMain from "./components/DocumentServiceMain.jsx"; //react router dom v6
+
+//This is the Routing page ,In this Page we declare all our routings using React-Router-Dom V6
+//And we are passing those routing to our APP.
 const router = createBrowserRouter([
   {
     path: "/",
