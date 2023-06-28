@@ -29,7 +29,6 @@ function FileUpload() {
     formData.append("statementDetails", data.statementDetails);
     console.log(formData);
     axios //axios is used to make http requests.
-
       .post("http://localhost:3000/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",

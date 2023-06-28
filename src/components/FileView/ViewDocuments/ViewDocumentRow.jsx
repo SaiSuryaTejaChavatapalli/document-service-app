@@ -1,19 +1,9 @@
 import { TableRow, TableCell } from "@mui/material";
 import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import axios from "axios";
-import {
-  formatSizeUnits,
-  dateFn,
-  deleteFn,
-} from "../../../utils/viewDocsUtils";
-import { styled } from "@mui/system";
-// const Style = styled(TableCell)({
-//   alignment: "center",
-//   backgroundColor: red,
-// });
+import { formatSizeUnits, dateFn } from "../../../utils/viewDocsUtils";
 
-let ViewDocumentRow = ({ data, handleDelete }) => {
+const ViewDocumentRow = ({ data, handleDelete }) => {
   return (
     <TableRow>
       <TableCell align="center">{data.applicationId}</TableCell>
