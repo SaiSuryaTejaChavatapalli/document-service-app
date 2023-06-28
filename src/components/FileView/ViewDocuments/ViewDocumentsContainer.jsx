@@ -72,9 +72,6 @@ function ViewDocumentsContainer() {
   useEffect(() => {
     search();
   }, [searchTxt]);
-  // useEffect(() => {
-  //   setFilterData(dateFilter(data, start, end));
-  // }, [end]);
 
   return (
     <div className="App" style={{ marginTop: "4.5rem" }}>
@@ -178,7 +175,7 @@ function ViewDocumentsContainer() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterData?.map((item, index) => (
+              {filterData?.map((item) => (
                 <ViewDocumentRow
                   key={item._id}
                   data={item}
